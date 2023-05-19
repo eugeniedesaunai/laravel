@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Argument;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
@@ -30,3 +32,24 @@ Route::get('/', [
     MainController::class,
     'index'
 ]);
+
+/* permet d'utiliser le query builder  */
+/* Route::get('/db', function () {
+    DB::table('arguments')->insert([
+        'title' => 'Lorem ipsum',
+        'body' => 'Lorem ipsum dolor sit amet'
+    ]);
+}); */
+
+/* via Eloquent */
+Route::get('/db', function () {
+    $argument = new Argument();
+    $argument->title = 'Lorem ipsum';
+    $argument->body = 'Lorem ipsum dolor sit amet';
+    $argument->save();
+});
+
+Route::get('/dblist', function () {
+    $argument = Argument::all();
+    dd($argument);
+});
