@@ -5,7 +5,7 @@ LABEL maintainer="Imed Ben Amor"
 # Copie des dossiers/fichiers sur le conteneur
 COPY .docker/php/php.ini /usr/local/etc/php/
 COPY .docker/apache/000-default.conf /etc/apache2/sites-available/
-COPY ./laravel.projet-mOvie /var/www/html
+COPY . /var/www/html
 
 # Installation de bibliothèques/logiciels
 RUN apt-get update \
