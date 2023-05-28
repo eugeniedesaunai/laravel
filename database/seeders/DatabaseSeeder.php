@@ -14,7 +14,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            ArgumentSeeder::class
+            ArgumentSeeder::class,
+            ActorSeeder::class
         ]);
         // \App\Models\User::factory(10)->create();
     }

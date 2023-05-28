@@ -62,3 +62,25 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+
+
+### Commande pour Eloquent 
+
+- Créer la table 
+php artisan make:model Actor
+Remplir les relations 
+- Créer la migration 
+php artisan make:migration create_actors_table
+Remplir le fichier afin de définir les différents champs de la bdd
+Envoyer la migration : docker-compose exec web php artisan migrate 
+- Créer du Factory 
+php artisan make:factory ActorFactory
+Remplir le factory afin de définir la taille du champ de la fausse donnée
+- Créer le seeder (pour de la fausse donnée)
+php artisan make:seeder ActorSeeder 
+Remplir le seeder afin de déterminé le nombre de fausse donnée envoyé 
+- Ajouter dans le fichier Database Seeder le Seeder qui vient d'être créer afin d'envoyer la bonne donnée 
+- Envoyer la fausse donnée : docker-compose exec web php artisan db:seed
