@@ -32,7 +32,7 @@ Route::get('/posts/{id}', function ($id) {
 Route::get('/', [
     MainController::class,
     'index'
-]);
+])->name('index');
 
 /* permet d'utiliser le query builder  */
 /* Route::get('/db', function () {
@@ -100,5 +100,5 @@ Route::get('/dblist', function () {
 });
 
 
-// Route pour formulaire
+// Route pour envoyer la donnée du form newsletter
 Route::post('/newsletter', [MainController::class, 'newsletter']);

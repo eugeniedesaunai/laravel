@@ -23,3 +23,10 @@
             </div>
         </section>
 @stop
+
+{{-- permet d'afficher un message de success --}}
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
