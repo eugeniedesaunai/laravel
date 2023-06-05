@@ -74,8 +74,10 @@ php artisan make:model Actor
 Remplir les relations 
 - Créer la migration 
 php artisan make:migration create_actors_table
+sudo docker-compose exec php artisan make:model Actor -m -> permet de créer le model et sa migration
 Remplir le fichier afin de définir les différents champs de la bdd
 Envoyer la migration : docker-compose exec web php artisan migrate 
+docker-compose exec web php artisan migrate:refresh
 - Créer du Factory 
 php artisan make:factory ActorFactory
 Remplir le factory afin de définir la taille du champ de la fausse donnée
@@ -84,3 +86,6 @@ php artisan make:seeder ActorSeeder
 Remplir le seeder afin de déterminé le nombre de fausse donnée envoyé 
 - Ajouter dans le fichier Database Seeder le Seeder qui vient d'être créer afin d'envoyer la bonne donnée 
 - Envoyer la fausse donnée : docker-compose exec web php artisan db:seed
+
+- permet de rajouter un attrivu à une table déjà existante : 
+sudo docker-compose exec web php artisan make:migration add_director_id_to_movies_table --table=movies

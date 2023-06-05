@@ -10,7 +10,7 @@ class Director extends Model
     use HasFactory;
 
     public function movies()
-    {
+    { // hasMany ou hasOne : à une clé étrangère
         return $this->hasMany(Movie::class);
     }
 }

@@ -11,6 +11,7 @@ class Actor extends Model
 
     public function movies()
     {
+        // belongsTo ou belongToMany : la  clé étrangère appartient à cette classe
         return $this->belongsToMany(Movie::class);
     }
 }
