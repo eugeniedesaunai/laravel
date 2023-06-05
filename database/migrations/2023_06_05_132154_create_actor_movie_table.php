@@ -16,7 +16,7 @@ class CreateActorMovieTable extends Migration
         //permet de créer la table pivot (table relation)
         //permet d'ajouter l'attribut director_id à la table movies
         //le constrained dit que la clé étrangère fait référence à la table présente avant l'id "actor_id" donc içi actor
-        // cascadeOnDelete permet de supprimer un élément en cascade, ( si on supprime un film, tous les films associé seront supprimer)
+        // cascadeOnDelete permet de supprimer un élément en cascade, (ex si on supprime un film, toutes le relations associées seront supprimée)
 
         Schema::create('actor_movie', function (Blueprint $table) {
             $table->id();

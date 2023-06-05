@@ -14,9 +14,9 @@ class MovieFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->sentence(2),
-            'description' => $this->faker->sentence(12),
-            'duration' => $this->faker->randomDigitNot(3),
+            'name' => $this->faker->sentence(4),
+            'description' => $this->faker->paragraph(),
+            'duration' => rand(300, 15000), // Entre 5 minutes et un peu plus de 4 heures
             'release' => $this->faker->date(),
         ];
     }

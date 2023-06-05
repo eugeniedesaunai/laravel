@@ -9,13 +9,15 @@ class Movie extends Model
 {
     use HasFactory;
 
-    public function director()
+    public function directors()
     { // belongsTo ou belongToMany : la  clé étrangère appartient à cette classe
+        //this-> cette classe, belongsTo-> chaque instance de Movie appartient à un seul réalisateur
         return $this->belongsTo(Director::class);
     }
 
     public function actors()
     { // belongsTo ou belongToMany : la  clé étrangère appartient à cette classe
+        // this-> cette classe, belongsTo-> chaque instance de Movie appartient à un plusieurs acteur
         return $this->belongsToMany(Actor::class);
     }
 }
