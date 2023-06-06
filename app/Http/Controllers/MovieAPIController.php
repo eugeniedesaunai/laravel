@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Movie;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class MovieAPIController extends Controller
 {
@@ -13,7 +15,9 @@ class MovieAPIController extends Controller
      */
     public function index()
     {
-        //
+        /* permet de récupérer tout les films */
+        $movies = Movie::all();
+        return $movies;
     }
 
     /**
@@ -24,7 +28,25 @@ class MovieAPIController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        /* permet d'enregistrer les films en BDD via l'url de l'API */
+        $validated = $request->validate([
+            'name' => 'required|unique:movies|string|max:255',
+            'description' => 'required',
+            'duration' => 'required|numeric',
+            'release' => 'required|date',
+            'director_id' => 'nullable|integer'
+        ]);
+
+
+        $movie = new Movie();
+        $movie->name =  $validated['name'];
+        $movie->description =  $validated['description'];
+        $movie->duration =  $validated['duration'];
+        $movie->release =  $validated['release'];
+        $movie->director_id =  $validated['director_id'];
+        $movie->save();
+
+        return "success";
     }
 
     /**
@@ -35,7 +57,8 @@ class MovieAPIController extends Controller
      */
     public function show($id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+        return $movie;
     }
 
     /**
@@ -47,7 +70,15 @@ class MovieAPIController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validated = $request->validate([
+            'name' => 'required|unique:movies|string|max:255',
+        ]);
+
+        $movie = Movie::findOrFail($id);
+
+        $movie->update($validated);
+
+        return $movie;
     }
 
     /**

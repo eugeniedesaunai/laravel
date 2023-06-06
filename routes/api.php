@@ -19,10 +19,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/movies', [MovieAPIController::class, 'index']);
+Route::apiResource('movies', MovieAPIController::class)/* ->except(['create', 'edit']) */;
+/* Route::get('/movies', [MovieAPIController::class, 'index']);
 Route::post('/movies', [MovieAPIController::class, 'store']);
 Route::get('/movies/{id}', [MovieAPIController::class, 'show']);
 Route::patch('/movies/{id}', [MovieAPIController::class, 'update']);
-Route::delete('/movies/{id}', [MovieAPIController::class, 'destroy']);
+Route::delete('/movies/{id}', [MovieAPIController::class, 'destroy']); */
 Route::get('/movies/{id}/actor', [MovieAPIController::class, 'actor']);
 Route::get('/movies/{id}/director', [MovieAPIController::class, 'director']);

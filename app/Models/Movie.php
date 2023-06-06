@@ -20,4 +20,8 @@ class Movie extends Model
         // this-> cette classe, belongsTo-> chaque instance de Movie appartient à un plusieurs acteur
         return $this->belongsToMany(Actor::class);
     }
+
+    protected $fillable = [
+        'name',
+    ];
 }
