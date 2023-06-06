@@ -28,10 +28,13 @@ Route::get('/movies/{id}', [MovieAPIController::class, 'show']);
 Route::patch('/movies/{id}', [MovieAPIController::class, 'update']);
 Route::delete('/movies/{id}', [MovieAPIController::class, 'destroy']); */
 Route::get('/movies/{id}/actor', [MovieAPIController::class, 'actors']);
+Route::post('/movies/{id}/actors', [MovieAPIController::class, 'linkActor']);
 Route::get('/movies/{id}/directors', [MovieAPIController::class, 'director']);
 
 /* Pour les acteurs */
 Route::apiResource('actors', ActorAPIController::class)/* ->except(['create', 'edit']) */;
+
+
 
 /* Pour les acteurs */
 Route::apiResource('directors', DirectorAPIController::class);

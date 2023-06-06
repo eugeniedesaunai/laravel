@@ -104,6 +104,18 @@ class MovieAPIController extends Controller
         return response()->json($actors);
     }
 
+    public function linkActor(Request $request, $id)
+    {
+        $movie = Movie::findOrFail($id);
+        $actorId = $request->input('actor_id');
+
+        // Utilisez la méthode attach() pour lier l'acteur au film en utilisant la table pivot
+        $movie->actors()->attach($actorId);
+
+        return response()->json(['message' => 'Acteur lié au film avec succès']);
+    }
+
+
     public function director($id)
     {
         $movie = Movie::findOrFail($id);

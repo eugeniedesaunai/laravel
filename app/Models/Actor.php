@@ -12,7 +12,7 @@ class Actor extends Model
     public function movies()
     {
         // belongsTo ou belongToMany : la  clé étrangère appartient à cette classe
-        return $this->belongsToMany(Movie::class);
+        return $this->belongsToMany(Movie::class, 'actor_movie', 'actor_id', 'movie_id');
     }
     protected $fillable = [
         'name',

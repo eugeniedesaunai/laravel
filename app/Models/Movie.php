@@ -12,7 +12,7 @@ class Movie extends Model
     public function directors()
     { // belongsTo ou belongToMany : la  clé étrangère appartient à cette classe
         //this-> cette classe, belongsTo-> chaque instance de Movie appartient à un seul réalisateur
-        return $this->belongsTo(Director::class);
+        return $this->belongsTo(Director::class, 'actor_movie', 'actor_id', 'movie_id');
     }
 
     public function actors()
