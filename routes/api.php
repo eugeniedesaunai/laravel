@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ActorAPIController;
 use App\Http\Controllers\MovieAPIController;
 /*
 |--------------------------------------------------------------------------
@@ -25,5 +26,8 @@ Route::post('/movies', [MovieAPIController::class, 'store']);
 Route::get('/movies/{id}', [MovieAPIController::class, 'show']);
 Route::patch('/movies/{id}', [MovieAPIController::class, 'update']);
 Route::delete('/movies/{id}', [MovieAPIController::class, 'destroy']); */
-Route::get('/movies/{id}/actor', [MovieAPIController::class, 'actor']);
-Route::get('/movies/{id}/director', [MovieAPIController::class, 'director']);
+Route::get('/movies/{id}/actor', [MovieAPIController::class, 'actors']);
+Route::get('/movies/{id}/directors', [MovieAPIController::class, 'director']);
+
+/* Pour les acteurs */
+Route::apiResource('actors', ActorAPIController::class)/* ->except(['create', 'edit']) */;

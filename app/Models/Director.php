@@ -13,4 +13,7 @@ class Director extends Model
     { // hasMany ou hasOne : à une clé étrangère
         return $this->hasMany(Movie::class);
     }
+    protected $fillable = [
+        'name',
+    ];
 }

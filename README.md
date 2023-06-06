@@ -94,4 +94,4 @@ sudo docker-compose exec web php artisan make:migration add_director_id_to_movie
 
 # Api 
 
-php artisan make:controller --api MovieAPIController
+php artisan make:controller --api ActorAPIController
