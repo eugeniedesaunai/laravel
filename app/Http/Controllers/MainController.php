@@ -19,7 +19,8 @@ class MainController extends Controller
 
     public function newsletter(Request $request)
     {
-        // permet de vérifier la donnée
+        /* première méthode, ajouter le fillable dans le model */
+        /*         // permet de vérifier la donnée
         $request->validate([
             'mail' => 'required|email|max:255|unique:subscribers',
         ]);
@@ -28,7 +29,16 @@ class MainController extends Controller
         $mail = $request->input('mail');
 
         // Enregistrement en base de données
-        Subscriber::create(['mail' => $mail]);
+        Subscriber::create(['mail' => $mail]);  */
+
+        /* deuxième méthode sans besoin d'utiliser le fillable */
+        $validated = $request->validate([
+            'mail' => 'required|email|max:255|unique:subscribers',
+        ]);
+        $subscriber = new Subscriber();
+        $subscriber->mail = $validated['mail'];
+        $subscriber->save();
+
 
         // Redirigez l'utilisateur vers la page d'accueil et affiche un message d'erreur
         return redirect()->route('index')->with('success', 'Inscription à la newsletter réussie !');
