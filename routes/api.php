@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActorAPIController;
 use App\Http\Controllers\MovieAPIController;
+use App\Http\Controllers\DirectorAPIController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -31,3 +32,6 @@ Route::get('/movies/{id}/directors', [MovieAPIController::class, 'director']);
 
 /* Pour les acteurs */
 Route::apiResource('actors', ActorAPIController::class)/* ->except(['create', 'edit']) */;
+
+/* Pour les acteurs */
+Route::apiResource('directors', DirectorAPIController::class);
