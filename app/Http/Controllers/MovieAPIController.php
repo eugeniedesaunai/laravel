@@ -89,7 +89,11 @@ class MovieAPIController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $movie = Movie::findOrFail($id);
+
+        $movie->delete();
+
+        return "Film supprimé avec succès";
     }
 
     public function actor($id)
