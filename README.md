@@ -90,3 +90,8 @@ sudo docker-compose exec web php artisan db:seed --class=HollywoodSeeder
 
 - permet de rajouter un attrivu à une table déjà existante : 
 sudo docker-compose exec web php artisan make:migration add_director_id_to_movies_table --table=movies
+
+
+# Api 
+
+php artisan make:controller --api MovieAPIController

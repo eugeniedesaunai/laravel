@@ -40,7 +40,7 @@ class MainController extends Controller
         $subscriber->save();
 
 
-        // Redirigez l'utilisateur vers la page d'accueil et affiche un message d'erreur
+        // Redirigez l'utilisateur vers la page d'accueil et affiche un message de success
         return redirect()->route('index')->with('success', 'Inscription à la newsletter réussie !');
     }
 }
