@@ -101,4 +101,4 @@ Route::get('/dblist', function () {
 
 
 // Route pour envoyer la donnée du form newsletter
-Route::post('/newsletter', [MainController::class, 'newsletter']);
+Route::post('/newsletter', [MainController::class, 'newsletter'])->name('newsletter');

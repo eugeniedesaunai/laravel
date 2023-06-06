@@ -21,7 +21,7 @@ class MainController extends Controller
     {
         // permet de vérifier la donnée
         $request->validate([
-            'mail' => ['required', 'email', 'regex:/^[\w\.-]+@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$/'],
+            'mail' => 'required|email|max:255|unique:subscribers',
         ]);
 
         // si c'est validé on récupère la valeur 
