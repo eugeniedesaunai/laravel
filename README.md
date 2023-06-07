@@ -95,3 +95,14 @@ sudo docker-compose exec web php artisan make:migration add_director_id_to_movie
 # Api 
 
 php artisan make:controller --api ActorAPIController
+
+Pour rattacher le modele
+php artisan make:controller --api ActorAPIController --model=Actor 
+
+
+Générer la documentation de l'api avec Scribe:
+docker-compose exec web composer require --dev knuckleswtf/scribe
+php artisan vendor:publish --tag=scribe-config
+config/scribe
+modifier la description, le type static en type laravel pour avoir des blades, modifier doc-url si besoin, ajouter dans example-language le language qu'on souhaite, postman enabled to false
+docker-compose exec web php artisan scribe:generate

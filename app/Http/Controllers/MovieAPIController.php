@@ -65,10 +65,10 @@ class MovieAPIController extends Controller
     public function update(Request $request, Movie $movie)
     {
         $validated = $request->validate([
-            'name' => 'required|unique:movies|string|max:255|bail',
-            'description' => 'bail|requiered|string',
-            'duration' => 'bail|requiered|integer|min:0|max:18000', // 5 heures max
-            'release' => 'bail|requiered|date_format:Y-m-d',
+            'name' => 'bail|nullable|string|max:255', // le bail signifie que l'execution s'arrete dés qu'il y a une erreur
+            'description' => 'bail|nullable|string',
+            'duration' => 'bail|nullable|integer|min:0|max:18000', // 5 heures max
+            'release' => 'bail|nullable|date_format:Y-m-d',
             'director_id' => 'bail|nullable|integer|exists:directors,id', // exists:directors,id  = vérifie si dans director il y a bien l'id correspondant
         ]);
 
@@ -90,7 +90,7 @@ class MovieAPIController extends Controller
         return response()->noContent();
     }
 
-    public function director(Movie $movie): Director
+    public function director(Movie $movie)
     {
         return $movie->director;
     }
@@ -100,14 +100,14 @@ class MovieAPIController extends Controller
         return $movie->actors;
     }
 
-    public function linkActor(Request $request, $id)
+
+    public function linkActor(Movie $movie, Request $request)
     {
-        $movie = Movie::findOrFail($id);
-        $actorId = $request->input('actor_id');
+        $actor = Actor::findOrFail($request->input('actor_id'));
 
-        // Utilisez la méthode attach() pour lier l'acteur au film en utilisant la table pivot
-        $movie->actors()->attach($actorId);
+        /* permet de rattacher le film à l'acteur donnée en parametre en créer un nouvel enregistrement en bdd */
+        $movie->actors()->attach($actor);
 
-        return response()->json(['message' => 'Acteur lié au film avec succès']);
+        return $movie->with('actors')->get();
     }
 }

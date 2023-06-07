@@ -17,7 +17,7 @@
                         </svg>
                     </a>
                     <div class="hidden ml-10 space-x-8 lg:block">
-                        <a href="#" target="_blank" class="text-base font-medium text-white hover:text-indigo-50">Documentation API</a>
+                        <a href="{{ route('scribe') }}" target="_blank" class="text-base font-medium text-white hover:text-indigo-50">Documentation API</a>
                     </div>
                 </div>
                 <div class="ml-10 space-x-4">

@@ -21,15 +21,24 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 /* Pour les films */
-Route::apiResource('movies', MovieAPIController::class);
+/* Route::apiResource('movies', MovieAPIController::class); */
 Route::get('/movies/{movie}/actor', [MovieAPIController::class, 'actors']);
-Route::post('/movies/{id}/actors', [MovieAPIController::class, 'linkActor']);
-Route::get('/movies/{movie}/directors', [MovieAPIController::class, 'director']);
+Route::post('/movies/{movie}/actors', [MovieAPIController::class, 'linkActor']);
+Route::get('/movies/{movie}/director', [MovieAPIController::class, 'director']);
 
 
 /* Pour les acteurs */
-Route::apiResource('actors', ActorAPIController::class);
+/* Route::apiResource('actors', ActorAPIController::class); */
 
 
 /* Pour les acteurs */
-Route::apiResource('directors', DirectorAPIController::class);
+/* Route::apiResource('directors', DirectorAPIController::class); */
+
+
+/* regroupement de tt les routes api */
+
+Route::apiResources([
+    'movies' => MovieAPIController::class,
+    'actors' => ActorAPIController::class,
+    'directors' => DirectorAPIController::class
+]);
