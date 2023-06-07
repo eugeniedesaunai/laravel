@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Actor;
 use App\Models\Movie;
 use App\Models\Director;
 use Illuminate\Http\Request;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Validator;
 
 class MovieAPIController extends Controller
 {
@@ -17,6 +16,7 @@ class MovieAPIController extends Controller
      */
     public function index()
     {
+        /* permet de récupérer tout les films */
         $movies = Movie::all();
         return $movies;
     }
@@ -39,7 +39,13 @@ class MovieAPIController extends Controller
         ]);
 
 
-        return Movie::create($validated);
+        $movie = new Movie();
+        $movie->name =  $validated['name'];
+        $movie->description =  $validated['description'];
+        $movie->duration =  $validated['duration'];
+        $movie->release =  $validated['release'];
+        $movie->director_id =  $validated['director_id'];
+        $movie->save();
 
         return "success";
     }
@@ -47,11 +53,12 @@ class MovieAPIController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Movie  $movie
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Movie $movie)
+    public function show($id)
     {
+        $movie = Movie::findOrFail($id);
         return $movie;
     }
 
@@ -59,18 +66,16 @@ class MovieAPIController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Movie  $movie
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Movie $movie)
+    public function update(Request $request, $id)
     {
         $validated = $request->validate([
-            'name' => 'required|unique:movies|string|max:255|bail',
-            'description' => 'bail|requiered|string',
-            'duration' => 'bail|requiered|integer|min:0|max:18000', // 5 heures max
-            'release' => 'bail|requiered|date_format:Y-m-d',
-            'director_id' => 'bail|nullable|integer|exists:directors,id', // exists:directors,id  = vérifie si dans director il y a bien l'id correspondant
+            'name' => 'required|unique:movies|string|max:255',
         ]);
+
+        $movie = Movie::findOrFail($id);
 
         $movie->update($validated);
 
@@ -80,24 +85,24 @@ class MovieAPIController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Movie  $movie
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Movie $movie)
+    public function destroy($id)
     {
+        $movie = Movie::findOrFail($id);
+
         $movie->delete();
 
-        return response()->noContent();
+        return "Film supprimé avec succès";
     }
 
-    public function director(Movie $movie): Director
+    public function actors($id)
     {
-        return $movie->director;
-    }
+        $movie = Movie::findOrFail($id);
+        $actors = $movie->actors;
 
-    public function actors(Movie $movie): Collection
-    {
-        return $movie->actors;
+        return $actors;
     }
 
     public function linkActor(Request $request, $id)
@@ -109,5 +114,14 @@ class MovieAPIController extends Controller
         $movie->actors()->attach($actorId);
 
         return response()->json(['message' => 'Acteur lié au film avec succès']);
+    }
+
+
+    public function director($id)
+    {
+        $movie = Movie::findOrFail($id);
+        $director = $movie->directors;
+
+        return $director;
     }
 }

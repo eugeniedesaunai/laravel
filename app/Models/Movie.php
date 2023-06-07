@@ -23,5 +23,9 @@ class Movie extends Model
 
     protected $fillable = [
         'name',
+        'description',
+        'duration',
+        'release',
+        'director_id',
     ];
 }

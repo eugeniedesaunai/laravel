@@ -20,20 +20,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-
-Route::apiResource('movies', MovieAPIController::class)/* ->except(['create', 'edit']) */;
-/* Route::get('/movies', [MovieAPIController::class, 'index']);
-Route::post('/movies', [MovieAPIController::class, 'store']);
-Route::get('/movies/{id}', [MovieAPIController::class, 'show']);
-Route::patch('/movies/{id}', [MovieAPIController::class, 'update']);
-Route::delete('/movies/{id}', [MovieAPIController::class, 'destroy']); */
-Route::get('/movies/{id}/actor', [MovieAPIController::class, 'actors']);
+/* Pour les films */
+Route::apiResource('movies', MovieAPIController::class);
+Route::get('/movies/{movie}/actor', [MovieAPIController::class, 'actors']);
 Route::post('/movies/{id}/actors', [MovieAPIController::class, 'linkActor']);
-Route::get('/movies/{id}/directors', [MovieAPIController::class, 'director']);
+Route::get('/movies/{movie}/directors', [MovieAPIController::class, 'director']);
+
 
 /* Pour les acteurs */
-Route::apiResource('actors', ActorAPIController::class)/* ->except(['create', 'edit']) */;
-
+Route::apiResource('actors', ActorAPIController::class);
 
 
 /* Pour les acteurs */
