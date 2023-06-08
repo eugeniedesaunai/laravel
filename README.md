@@ -106,3 +106,8 @@ php artisan vendor:publish --tag=scribe-config
 config/scribe
 modifier la description, le type static en type laravel pour avoir des blades, modifier doc-url si besoin, ajouter dans example-language le language qu'on souhaite, postman enabled to false
 docker-compose exec web php artisan scribe:generate
+
+
+# Authentification 
+sudo docker-compose exec web composer require laravel/ui
+php artisan ui bootstrap --auth

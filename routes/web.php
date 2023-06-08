@@ -3,6 +3,7 @@
 use App\Models\Movie;
 use App\Models\Argument;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MainController;
 
@@ -102,3 +103,7 @@ Route::get('/dblist', function () {
 
 // Route pour envoyer la donnée du form newsletter
 Route::post('/newsletter', [MainController::class, 'newsletter'])->name('newsletter');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
