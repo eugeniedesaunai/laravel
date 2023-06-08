@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class MainController extends Controller
 {
+    /**
+     * index
+     *
+     * @return void
+     */
     public function index()
     {
         /* permet de récupérer tout les éléments de la table Argument en BDD */

@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActorAPIController;
 use App\Http\Controllers\MovieAPIController;
 use App\Http\Controllers\DirectorAPIController;
+use App\Services\Swapi;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -42,3 +43,9 @@ Route::apiResources([
     'actors' => ActorAPIController::class,
     'directors' => DirectorAPIController::class
 ]);
+
+
+Route::get('/swapi', function () {
+    $swapi = new Swapi();
+    return $swapi->films()->get();
+});
